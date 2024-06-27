@@ -10,13 +10,13 @@ import 'package:sqflite/sqflite.dart' as sqlite;
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-
+  final cName = 'Losers Night${DateTime.now().millisecondsSinceEpoch}';
   final client = Client(
-    'Losers Night',
+    cName,
     databaseBuilder: (_) async {
       final dir = await getApplicationSupportDirectory();
       final db = MatrixSdkDatabase(
-        "c.name",
+        cName,
         database: await sqlite.openDatabase('$dir/database.sqlite'),
       );
       await db.open();
