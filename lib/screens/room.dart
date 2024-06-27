@@ -131,6 +131,8 @@ class _RoomPageState extends State<RoomPage> {
                                     child: Opacity(
                                       opacity: timeline.events[i].status.isSent ? 1 : 0.5,
                                       child: BubbleNormalImage(
+                                        onTap: () => {},
+                                        onLongPress: () => {},
                                         key: ValueKey(event.eventId),
                                         isSender: isMe,
                                         color: isMe ? Theme.of(context).secondaryHeaderColor : Colors.grey.shade200,
