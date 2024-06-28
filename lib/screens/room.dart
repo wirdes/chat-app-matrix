@@ -2,6 +2,8 @@ import 'package:chat_bubbles/chat_bubbles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
+import 'package:loser_night/components/circular_avatar.dart';
+import 'package:loser_night/components/edit_room.dart';
 import 'package:loser_night/components/input.dart';
 import 'package:loser_night/components/reply_content_widget.dart';
 import 'package:loser_night/components/swipeable.dart';
@@ -80,7 +82,22 @@ class _RoomPageState extends State<RoomPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.room.getLocalizedDisplayname()),
+        title: InkWell(
+          onTap: () {
+            Navigator.of(context).push(
+              MaterialPageRoute(
+                builder: (context) => EditRoomWidget(room: widget.room),
+              ),
+            );
+          },
+          child: Row(
+            children: [
+              CircularAvatarWidget.fromRoom(widget.room, radius: 20),
+              const SizedBox(width: 8),
+              Text(widget.room.getLocalizedDisplayname()),
+            ],
+          ),
+        ),
       ),
       body: SafeArea(
         child: FutureBuilder(

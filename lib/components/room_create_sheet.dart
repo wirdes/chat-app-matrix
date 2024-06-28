@@ -33,6 +33,7 @@ class _RoomCreateSheetState extends State<RoomCreateSheet> {
                   });
                   try {
                     await client.createRoom(
+                      name: _roomNameTextField.text,
                       invite: [
                         '@${_roomNameTextField.text}:matrix.org',
                       ],

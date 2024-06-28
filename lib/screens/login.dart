@@ -21,6 +21,7 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> {
   List<IdentityProvider> identityProviders = [];
+  bool loading = false;
 
   void getSSO() async {
     Map<String, dynamic>? jsonResp = <String, dynamic>{};

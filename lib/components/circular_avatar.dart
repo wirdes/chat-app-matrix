@@ -39,8 +39,9 @@ class CircularAvatarWidget extends StatelessWidget {
       radius: radius,
       foregroundImage: url == null ? null : Image.network('https://matrix.org/_matrix/media/r0/download/${url!.host}${url!.path}').image,
       child: Text(url != null ? "" : displayName.substring(0, 1).toUpperCase(),
-          style: const TextStyle(
+          style: TextStyle(
             color: Colors.white,
+            fontSize: radius / 1.5,
           )),
     );
   }
