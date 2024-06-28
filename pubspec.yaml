@@ -1,7 +1,7 @@
 name: loser_night
 description: "A new Flutter project."
 publish_to: "none"
-version: 0.1.0
+version: 0.1.1
 
 environment:
   sdk: ">=3.4.3 <4.0.0"
@@ -22,6 +22,12 @@ dependencies:
   http: ^1.2.1
   chat_bubbles: ^1.6.0
   hive: ^2.2.3
+  image_picker: ^1.1.2
+  file_picker: ^8.0.5
+  flutter_map_location_picker: ^0.0.4
+  permission_handler: ^11.3.1
+  flutter_map: ^6.2.1
+  latlong2: ^0.9.1
 
 dev_dependencies:
   flutter_test:

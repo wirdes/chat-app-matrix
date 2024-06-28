@@ -12,12 +12,13 @@ class Input extends StatelessWidget {
   final bool? obscureText;
   final IconData? suffixIcon;
   final void Function()? onTapIcon;
-  final String label;
+  final String? label;
   final bool disabled;
   final String? Function(String?)? validator;
   final TextInputType? keyboardType;
   final void Function(String)? onChanged;
   final String? prefixText;
+  final String? hintText;
 
   final List<TextInputFormatter>? inputFormatters;
 
@@ -29,11 +30,12 @@ class Input extends StatelessWidget {
     this.validator,
     this.suffixIcon,
     this.onTapIcon,
-    required this.label,
+    this.label,
     this.disabled = false,
     this.keyboardType,
     this.onChanged,
     this.prefixText,
+    this.hintText,
   });
 
   @override
@@ -55,6 +57,7 @@ class Input extends StatelessWidget {
           hintStyle: TextStyle(color: Theme.of(context).colorScheme.onSurface),
           labelText: label,
           border: const OutlineInputBorder(),
+          hintText: hintText,
         ),
         inputFormatters: inputFormatters,
       ),
