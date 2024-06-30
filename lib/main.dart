@@ -34,6 +34,7 @@ class LoserNightChatApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      
         builder: (context, child) => Provider<Client>(
               create: (context) => client,
               child: child,
@@ -46,7 +47,8 @@ class LoserNightChatApp extends StatelessWidget {
           '/room': (_) {
             final room = ModalRoute.of(context)!.settings.arguments as Room;
             return RoomPage(room: room);
-          }
-        });
+          },
+
+        },);
   }
 }
