@@ -11,6 +11,7 @@ class LocationMessage extends Message {
 
   @override
   Widget buildMessage(BuildContext context) {
+    final size = MediaQuery.of(context).size;
     List<Widget> children = [
       TileLayer(
         urlTemplate: 'https://www.google.com/maps/vt/pb=!1m4!1m3!1i{z}!2i{x}!3i{y}!2m3!1e0!2sm!3i420120488!3m7!2sen!5e1105!12m4!1e68!2m2!1sset!2sRoadmap!4e0!5m1!1e0!23i4111425',
@@ -47,13 +48,18 @@ class LocationMessage extends Message {
         ));
       },
       child: SizedBox(
-        width: 120,
-        height: 80,
-        child: AbsorbPointer(
-          absorbing: true,
-          child: FlutterMap(
-            options: MapOptions(initialCenter: LatLng(latitude!, longitude!), initialZoom: 13.0),
-            children: children,
+        width: size.width * 0.6,
+        height: size.width * 0.35,
+        child: Material(
+          clipBehavior: Clip.hardEdge,
+          borderRadius: BorderRadius.circular(16),
+          elevation: 2,
+          child: AbsorbPointer(
+            absorbing: true,
+            child: FlutterMap(
+              options: MapOptions(initialCenter: LatLng(latitude!, longitude!), initialZoom: 13.0),
+              children: children,
+            ),
           ),
         ),
       ),

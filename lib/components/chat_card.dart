@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:loser_night/components/circular_avatar.dart';
+import 'package:loser_night/components/settings/avatar.dart';
 import 'package:loser_night/screens/room.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 
@@ -49,13 +49,14 @@ class ChatCard extends StatelessWidget {
           children: [
             Expanded(
                 child: Text(
-              room.getLocalizedDisplayname(),
+              room.getLocalizedDisplayname().toTitleCase(),
               style: Theme.of(context).textTheme.titleLarge,
               maxLines: 1,
             )),
             Text(
               room.lastEvent?.originServerTs.formatedLocale(context) ?? "",
               style: Theme.of(context).textTheme.bodySmall,
+              maxLines: 1,
             )
           ],
         ),
@@ -68,6 +69,7 @@ class ChatCard extends StatelessWidget {
                 Row(
                   children: [
                     Text.rich(
+                      maxLines: 1,
                       TextSpan(
                         children: [
                           TextSpan(text: room.lastEvent?.senderFromMemoryOrFallback.displayName ?? room.lastEvent?.senderFromMemoryOrFallback.senderId),
@@ -87,7 +89,7 @@ class ChatCard extends StatelessWidget {
           Visibility(visible: room.membership == Membership.invite, child: const Icon(Icons.notification_important, size: 18)),
           Visibility(visible: room.isFavourite, child: const Padding(padding: EdgeInsets.only(left: 4.0), child: Icon(Icons.star, size: 18, color: Colors.amber))),
         ]),
-        leading: CircularAvatarWidget.fromRoom(room),
+        leading: Avatar.fromRoom(room),
       ),
     );
   }

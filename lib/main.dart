@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:loser_night/screens/login.dart';
 import 'package:loser_night/screens/register.dart';
 import 'package:loser_night/screens/room.dart';
@@ -34,21 +35,29 @@ class LoserNightChatApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      
-        builder: (context, child) => Provider<Client>(
-              create: (context) => client,
-              child: child,
-            ),
-        home: client.isLogged() ? const RoomListPage() : const LoginPage(),
-        routes: {
-          '/login': (_) => const LoginPage(),
-          '/room_list': (_) => const RoomListPage(),
-          '/register': (_) => const RegisterPage(),
-          '/room': (_) {
-            final room = ModalRoute.of(context)!.settings.arguments as Room;
-            return RoomPage(room: room);
-          },
-
-        },);
+      locale: const Locale('tr', 'TR'),
+      supportedLocales: const [
+        Locale('tr', 'TR'),
+      ],
+      localizationsDelegates: const [
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+      ],
+      builder: (context, child) => Provider<Client>(
+        create: (context) => client,
+        child: child,
+      ),
+      home: client.isLogged() ? const RoomListPage() : const LoginPage(),
+      routes: {
+        '/login': (_) => const LoginPage(),
+        '/room_list': (_) => const RoomListPage(),
+        '/register': (_) => const RegisterPage(),
+        '/room': (_) {
+          final room = ModalRoute.of(context)!.settings.arguments as Room;
+          return RoomPage(room: room);
+        },
+      },
+    );
   }
 }

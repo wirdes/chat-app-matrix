@@ -19,19 +19,29 @@ class ImageMessage extends Message {
               title: Text(event!.content['body'].toString()),
               backgroundColor: Colors.transparent,
             ),
-            body: SizedBox(
-              width: size.width,
-              child: InteractiveViewer(
-                child: Image(image: image()),
+            body: Hero(
+              tag: event!.eventId,
+              child: SizedBox(
+                width: size.width,
+                child: InteractiveViewer(
+                  child: Image(image: image()),
+                ),
               ),
             ),
           ),
         ));
       },
-      child: SizedBox(
-        width: 120,
-        height: 120,
-        child: Image(image: image(thumb: true), fit: BoxFit.cover),
+      child: Container(
+        clipBehavior: Clip.hardEdge,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(16),
+        ),
+        width: size.width * 0.6,
+        height: size.width * 0.7,
+        child: Hero(
+          tag: event!.eventId,
+          child: Image(image: image(thumb: true), fit: BoxFit.cover),
+        ),
       ),
     );
   }

@@ -20,13 +20,8 @@ class ReplyContentWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<Event?>(
-      future: event.getReplyEvent(
-        timeline,
-      ),
-      builder: (
-        BuildContext context,
-        snapshot,
-      ) {
+      future: event.getReplyEvent(timeline),
+      builder: (BuildContext context, snapshot) {
         final replyEvent = snapshot.data ??
             Event(
               eventId: event.relationshipEventId!,

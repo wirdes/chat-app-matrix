@@ -1,10 +1,8 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:loser_night/components/circular_avatar.dart';
 import 'package:loser_night/components/input.dart';
+import 'package:loser_night/components/settings/avatar.dart';
 import 'package:loser_night/managers/attachment_manager.dart';
 import 'package:matrix/matrix.dart';
-import 'package:provider/provider.dart';
 
 class EditRoomWidget extends StatefulWidget {
   final Room room;
@@ -91,11 +89,11 @@ class _EditRoomWidgetState extends State<EditRoomWidget> {
                             },
                           );
                         },
-                        child: CircularAvatarWidget.fromRoom(widget.room, radius: 80),
+                        child: Avatar.fromRoom(widget.room, radius: 250),
                       ),
                       Positioned(
-                        right: 4,
-                        bottom: 4,
+                        right: 16,
+                        bottom: 16,
                         child: Material(
                           color: Colors.white,
                           elevation: 3,
@@ -133,8 +131,7 @@ class _EditRoomWidgetState extends State<EditRoomWidget> {
                       });
                       if (editRoomName) {
                         try {
-                          final a = await widget.room.setName(controller.text);
-                          print(a);
+                          await widget.room.setName(controller.text);
                         } catch (e) {
                           ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(e.toString())));
                         }
@@ -160,7 +157,7 @@ class _EditRoomWidgetState extends State<EditRoomWidget> {
                               final member = users[index];
                               return ListTile(
                                 title: Text(member.displayName ?? member.id),
-                                leading: CircularAvatarWidget.fromUser(member),
+                                leading: Avatar.fromUser(member),
                                 trailing: widget.room.canKick
                                     ? IconButton(
                                         onPressed: () async {

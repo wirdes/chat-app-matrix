@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:loser_night/components/settings/avatar.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 class PermissinWidget extends StatefulWidget {
@@ -65,15 +66,5 @@ class _PermissinWidgetState extends State<PermissinWidget> {
         ),
       ],
     );
-  }
-}
-
-extension StringExtension on String {
-  String toCapitalized() {
-    return "${this[0].toUpperCase()}${substring(1)}";
-  }
-
-  String toTitleCase() {
-    return split(" ").map((e) => e.toCapitalized()).join(" ");
   }
 }

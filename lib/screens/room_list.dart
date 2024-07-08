@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:loser_night/components/chat_card.dart';
 import 'package:loser_night/components/room_create_sheet.dart';
-import 'package:loser_night/screens/login.dart';
+import 'package:loser_night/components/settings/avatar.dart';
 import 'package:loser_night/screens/room.dart';
 import 'package:matrix/matrix.dart';
 import 'package:provider/provider.dart';
@@ -16,14 +16,14 @@ class RoomListPage extends StatefulWidget {
 }
 
 class _RoomListPageState extends State<RoomListPage> {
-  void _logout() async {
-    final client = Provider.of<Client>(context, listen: false);
-    await client.logout();
-    Navigator.of(context).pushAndRemoveUntil(
-      MaterialPageRoute(builder: (_) => const LoginPage()),
-      (route) => false,
-    );
-  }
+  // void _logout() async {
+  //   final client = Provider.of<Client>(context, listen: false);
+  //   await client.logout();
+  //   Navigator.of(context).pushAndRemoveUntil(
+  //     MaterialPageRoute(builder: (_) => const LoginPage()),
+  //     (route) => false,
+  //   );
+  // }
 
   void _join(Room room) async {
     if (room.membership != Membership.join) {
@@ -42,12 +42,25 @@ class _RoomListPageState extends State<RoomListPage> {
     return Scaffold(
       key: scaffoldKey,
       appBar: AppBar(
-        title: const Text('Chats'),
+        title: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 8.0),
+          child: Text('Chats', style: Theme.of(context).textTheme.headlineLarge),
+        ),
         actions: [
-          IconButton(
-            icon: const Icon(Icons.logout),
-            onPressed: _logout,
-          ),
+          FutureBuilder(
+              future: client.getUserProfile(client.userID!),
+              builder: (context, snapshot) {
+                if (snapshot.hasData) {
+                  final user = snapshot.data;
+                  return Avatar(
+                    url: user?.avatarUrl,
+                    name: user?.displayname ?? client.userID,
+                    size: 40,
+                  );
+                }
+                return const CircularProgressIndicator();
+              }),
+          const SizedBox(width: 24),
         ],
       ),
       floatingActionButton: FloatingActionButton(
