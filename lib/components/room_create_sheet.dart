@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart' hide Visibility;
-import 'package:loser_night/components/input.dart';
+import 'package:loser_night/components/chat/input.dart';
 import 'package:matrix/matrix.dart';
 import 'package:provider/provider.dart';
 

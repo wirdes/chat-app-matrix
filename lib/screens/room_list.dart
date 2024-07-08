@@ -1,4 +1,6 @@
+import 'package:adaptive_dialog/adaptive_dialog.dart';
 import 'package:flutter/material.dart';
+import 'package:loser_night/components/bootstrap/bootstrap_dialog.dart';
 import 'package:loser_night/components/chat_card.dart';
 import 'package:loser_night/components/room_create_sheet.dart';
 import 'package:loser_night/components/settings/avatar.dart';
@@ -16,14 +18,23 @@ class RoomListPage extends StatefulWidget {
 }
 
 class _RoomListPageState extends State<RoomListPage> {
-  // void _logout() async {
-  //   final client = Provider.of<Client>(context, listen: false);
-  //   await client.logout();
-  //   Navigator.of(context).pushAndRemoveUntil(
-  //     MaterialPageRoute(builder: (_) => const LoginPage()),
-  //     (route) => false,
-  //   );
-  // }
+  void checkBootstrap(Client client) async {
+    if (!client.encryptionEnabled) return;
+    await client.accountDataLoading;
+    await client.userDeviceKeysLoading;
+    if (client.prevBatch == null) {
+      await client.onSync.stream.first;
+    }
+    final crossSigning = await client.encryption?.crossSigning.isCached() ?? false;
+    final needsBootstrap = await client.encryption?.keyManager.isCached() == false || client.encryption?.crossSigning.enabled == false || crossSigning == false;
+    if (needsBootstrap == true) {
+      await BootstrapDialog(
+        client: client,
+      ).show(context);
+
+      return;
+    }
+  }
 
   void _join(Room room) async {
     if (room.membership != Membership.join) {
@@ -34,6 +45,13 @@ class _RoomListPageState extends State<RoomListPage> {
         builder: (_) => RoomPage(room: room),
       ),
     );
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    final client = Provider.of<Client>(context, listen: false);
+    checkBootstrap(client);
   }
 
   @override

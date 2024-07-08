@@ -32,7 +32,16 @@ dependencies:
   linagora_design_flutter:
     git:
       url: git@github.com:linagora/linagora-design-flutter.git
-
+  universal_html: ^2.2.4
+  package_info_plus: ^8.0.0
+  adaptive_dialog: ^1.8.0+1
+  flutter_secure_storage: ^4.2.0
+  share_plus: ^9.0.0
+  future_loading_dialog:
+    git:
+      url: git@github.com:linagora/future-loading-dialog.git
+      ref: main
+  lottie: ^3.0.0
 
 dev_dependencies:
   flutter_test:
@@ -41,3 +50,5 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
+  assets:
+    - assets/

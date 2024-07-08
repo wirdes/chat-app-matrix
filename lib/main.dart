@@ -1,30 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:loser_night/managers/encrypted_message.dart';
 import 'package:loser_night/screens/login.dart';
 import 'package:loser_night/screens/register.dart';
 import 'package:loser_night/screens/room.dart';
 import 'package:loser_night/screens/room_list.dart';
 import 'package:matrix/matrix.dart';
-import 'package:path_provider/path_provider.dart';
 import 'package:provider/provider.dart';
-import 'package:sqflite/sqflite.dart' as sqlite;
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  final cName = 'Losers Night${DateTime.now().millisecondsSinceEpoch}';
-  final client = Client(
-    cName,
-    databaseBuilder: (_) async {
-      final dir = await getApplicationSupportDirectory();
-      final db = MatrixSdkDatabase(
-        cName,
-        database: await sqlite.openDatabase('$dir/database.sqlite'),
-      );
-      await db.open();
-      return db;
-    },
-  );
-  await client.init();
+  final client = await EncryptedMessage().init();
   runApp(LoserNightChatApp(client: client));
 }
 

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:loser_night/components/input.dart';
+import 'package:loser_night/components/chat/input.dart';
 import 'package:loser_night/components/settings/avatar.dart';
-import 'package:loser_night/managers/attachment_manager.dart';
+import 'package:loser_night/managers/attachment.dart';
 import 'package:matrix/matrix.dart';
 
 class EditRoomWidget extends StatefulWidget {

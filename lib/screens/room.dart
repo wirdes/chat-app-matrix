@@ -3,10 +3,10 @@ import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
 import 'package:loser_night/components/edit_room.dart';
-import 'package:loser_night/components/reply_content_widget.dart';
+import 'package:loser_night/components/chat/reply_content_widget.dart';
 import 'package:loser_night/components/settings/avatar.dart';
 import 'package:loser_night/components/swipeable.dart';
-import 'package:loser_night/managers/attachment_manager.dart';
+import 'package:loser_night/managers/attachment.dart';
 import 'package:loser_night/messages/image_message.dart';
 import 'package:loser_night/messages/location_message.dart';
 import 'package:matrix/matrix.dart';
@@ -390,11 +390,14 @@ class MessagesWidget extends StatelessWidget {
                 crossAxisAlignment: isMe ? CrossAxisAlignment.end : CrossAxisAlignment.start,
                 children: [
                   if (event.relationshipType == RelationshipTypes.reply)
-                    ReplyContentWidget(
-                      event: event,
-                      timeline: timeline,
-                      scrollToEventId: scrollToEventId,
-                      ownMessage: isMe,
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 4.0, vertical: 2),
+                      child: ReplyContentWidget(
+                        event: event,
+                        timeline: timeline,
+                        scrollToEventId: scrollToEventId,
+                        ownMessage: isMe,
+                      ),
                     ),
                   Builder(builder: (context) {
                     if (MessageTypes.Text == event.messageType) {
