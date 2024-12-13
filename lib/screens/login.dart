@@ -1,6 +1,6 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
-import 'package:flutter_web_auth/flutter_web_auth.dart';
+import 'package:flutter_web_auth_2/flutter_web_auth_2.dart';
 import 'package:loser_night/components/sso_button.dart';
 import 'package:matrix/matrix.dart';
 import 'package:provider/provider.dart';
@@ -143,7 +143,7 @@ Future<String> authenticateWithWebAuth({
     redirectUrl: redirectUrl,
   );
   final urlScheme = _getRedirectUrlScheme(redirectUrl);
-  return await FlutterWebAuth.authenticate(
+  return await FlutterWebAuth2.authenticate(
     url: url,
     callbackUrlScheme: urlScheme,
   );
